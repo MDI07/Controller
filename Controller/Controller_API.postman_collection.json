@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "controller-api-collection",
+		"name": "Controller API",
+		"description": "Коллекция API для тестирования Controller приложения",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ping - Test Connection",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/ping",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ping"
+					]
+				},
+				"description": "Проверка подключения к серверу. Ожидается HTTP 200 OK при успешном подключении."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Input Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"mobile_input\",\n  \"device_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"axes\": {\n    \"x\": 0.3,\n    \"y\": -0.7\n  },\n  \"buttons\": {\n    \"A\": true,\n    \"B\": false\n  },\n  \"ts\": 1732523456123\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/input",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"input"
+					]
+				},
+				"description": "Отправка события ввода от мобильного контроллера. Содержит данные джойстика и кнопок."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Orientation Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"mobile_orientation\",\n  \"orientation\": {\n    \"qx\": 0.0,\n    \"qy\": 0.0,\n    \"qz\": 0.0,\n    \"qw\": 1.0\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/orientation",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"orientation"
+					]
+				},
+				"description": "Отправка события ориентации устройства (гироскоп/акселерометр). Содержит кватернион ориентации."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8777",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "your_token_here",
+			"type": "string"
+		}
+	]
+}
+
